@@ -13,7 +13,7 @@ Click "Options" and show all the devices.
 ![image](https://user-images.githubusercontent.com/1586332/173350849-04c52fa1-8e71-4b0e-9191-4bf78e325522.png)
 
 
-Also you can only run the code from HTTPS and after you've swapped the drivers, so it's not very "Plug and play" for any user out there from their desktop.
+Also you can only run the code from HTTPS and after you've swapped the drivers, so it's not very "Plug and play" for any user out there from their desktop.              
 
-Online Example:
-https:e/untamed.zone/TrueRNG/index.htm![settings]
+Online Example:           
+https://untamed.zone/TrueRNG/index.htm
