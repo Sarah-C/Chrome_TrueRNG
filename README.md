@@ -1,9 +1,8 @@
 # Chrome: TrueRNG via Web Serial API.
 Using TrueRNG in Chrome using Web Serial API.                
 
-This little webpage (linked at the bottom of this readme) has a "Connect" button to select the TrueRNG device. Once selected the page connects to it, and starts reading the random numbers produced as an array of unsigned 8 bit values every few milliseconds.                  
-
-Meanwhile an animation loop running at 60 FPS takes any new random values that have been created and writes them in sequence to the "Pixel display box". Once the box is filled, it cycles around again so you can see the steady in-flow of random data being read in.            
+This little webpage (linked at the bottom of this readme) has a "Connect" button to select the TrueRNG device. Once selected the page connects to it, and starts reading the random numbers produced as an array of unsigned 8 bit values every few milliseconds asynchronously. These are written to the "Pixel display box" back-buffer.                
+Meanwhile an animation loop running at 60 FPS takes the "Pixel display box" backbuffer and draws it to the display canvas. Once the box is filled, it cycles around again so you can see the steady in-flow of random data being read in.            
 
 All from the comfort of your browser via plain JavaScript!                   
 https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API                      
