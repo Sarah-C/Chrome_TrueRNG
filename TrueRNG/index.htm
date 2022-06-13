@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web Serial - TrueRNG</title>
+	<style>
+		body {
+			font-family: arial;
+		}
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+
+	<button id="connect">Connect</button><br />
+	<br />
+	<canvas id="canvas"></canvas>
+      
+<script>
+let conButton = document.getElementById("connect")
+
+const c = document.getElementById("canvas");
+let ctx = c.getContext("2d");
+c.width = 800;
+c.height = 600;
+let imageData = ctx.getImageData(0, 0, c.width, c.height);
+let imageData32 = new Uint32Array(imageData.data.buffer);
+let pixelsPerFrame = imageData32.length;
+let ptr = 0;
+
+requestAnimationFrame(nextFrame);
+
+function nextFrame(){
+	requestAnimationFrame(nextFrame);
+	ctx.putImageData(imageData, 0, 0)
+}
+
+function getNewSerialData(serialData){
+	localImageData32 = imageData32;
+	// Draw unsigned bytes from the TrueRNG as pixels in a fast way.
+	serialData.forEach(function (r){
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr++] = ((r >>= 1) & 1) * -16777215;
+		imageData32[ptr] = ((r >>= 1) & 1) * -16777215;
+		if(ptr >= pixelsPerFrame - 8) ptr = 0;
+	});
+}
+
+conButton.addEventListener("click", async () => {
+	const filters = [{ usbVendorId: 0x04D8 }];
+	const port = await navigator.serial.requestPort({filters}); 
+	await port.open({ baudRate: 115200});
+	conButton.style.display = "none";
+	const reader = port.readable.getReader();
+	while (true) {
+	  const { value, done } = await reader.read();
+	  if (done) {
+		reader.releaseLock();
+		break;
+	  }
+	  getNewSerialData(value);
+	}
+});
+
+</script>
+</body>
+</html>
