@@ -1,7 +1,7 @@
 # Chrome: TrueRNG via Web Serial API.
 Using TrueRNG in Chrome using Web Serial API.
 https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API
-![image](https://user-images.githubusercontent.com/1586332/173351222-8843c9a1-b28c-4634-82e2-d9143d73e405.png)
+![image](https://user-images.githubusercontent.com/1586332/173351307-cce7d198-f512-478a-8990-a72b4c13a745.png)
 
 
 ![image](https://user-images.githubusercontent.com/1586332/173350463-565d2e9c-b947-4d4d-abdf-79a7ee4c359f.png)
